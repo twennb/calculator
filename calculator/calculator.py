@@ -1,7 +1,6 @@
 """a simple calculator application that runs in the command line"""
 
 import sys
-import math
 
 # Calculator features:
 # addition
@@ -58,14 +57,19 @@ def square(x):
 
 def root(x):
     """function returns the root of value x"""
-    result = math.sqrt(x)
+    root_constant = 0.5
+    result = x ** root_constant
     print(f"The square root of {x} is {result}\n--------------------")
 
-    log_history(x, "**", 0.5, result)
+    log_history(x, "**", root_constant, result)
 
 
 def modulo(x, y):
     """function returns x % y"""
+    result = x % y
+    print(f"{x} module {y} = {result}\n--------------------")
+
+    log_history(x, "%", y, result)
 
 
 def log_history(x, operator, y, result):
@@ -96,7 +100,7 @@ def main():
             "'div' to perform division,\n"
             "'square' to square a number,\n"
             "'root' to find the square root of a number,\n"
-            # "'mod' to perform a modulo operation on two numbers,\n"
+            "'mod' to perform a modulo operation on two numbers,\n"
             "'history' to see operation history,\n"
             "'exit' to close the app\n"
             ": "
@@ -178,6 +182,22 @@ def main():
                     except ValueError:
                         print("Not a number!")
                 root(x)
+            case "mod":
+                while True:
+                    try:
+                        x = int(
+                            input("Enter the first number for the modulo evaluation: "))
+                        break
+                    except ValueError:
+                        print("Not a number!")
+                while True:
+                    try:
+                        y = int(
+                            input("Enter the second number for the modulo evaluation: "))
+                        break
+                    except ValueError:
+                        print("Not a number!")
+                modulo(x, y)
             case "history":
                 show_history()
             case "exit":
