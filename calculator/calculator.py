@@ -33,6 +33,10 @@ def subtract(x, y):
 
 def multiply(x, y):
     """function returns x multiplied by y"""
+    result = x * y
+    print(f"{x} * {y} = {result}\n--------------------")
+
+    log_history(x, "*", y, result)
 
 
 def divide(x, y):
@@ -59,9 +63,9 @@ def log_history(x, operator, y, result):
 def show_history():
     """function handling the displaying of calculation history"""
     if not history:
-        print("\nNo history to show!")
+        print("No history to show!\n--------------------")
     else:
-        print("\nPrevious calculations (oldest first): \n" + "--------------------")
+        print("Previous calculations (oldest first): ")
         for item in history:
             print(item)
         print("--------------------")
@@ -75,7 +79,7 @@ def main():
             "\nWhat would you like to do?\n"
             "'add' to perform addition,\n"
             "'sub' to perform subtraction,\n"
-            # "'multi' to perform multiplication,\n"
+            "'mult' to perform multiplication,\n"
             # "'div' to perform division,\n"
             # "'square' to square a number,\n"
             # "'root' to find the root of a number,\n"
@@ -84,10 +88,9 @@ def main():
             "'exit' to close the app\n"
             ": "
         )
+        print("\n--------------------")
         match choice.strip().lower():
-
             case "add":
-                print("\n--------------------")
                 while True:
                     try:
                         x = int(input("Enter first number to be added: "))
@@ -102,7 +105,6 @@ def main():
                         print("Not a number!")
                 add(x, y)
             case "sub":
-                print("\n--------------------")
                 while True:
                     try:
                         x = int(input("Enter the number to subtract from: "))
@@ -116,6 +118,22 @@ def main():
                     except ValueError:
                         print("Not a number!")
                 subtract(x, y)
+            case "mult":
+                while True:
+                    try:
+                        x = int(
+                            input("Enter the first number to be multiplied: "))
+                        break
+                    except ValueError:
+                        print("Not a number!")
+                while True:
+                    try:
+                        y = int(
+                            input("Enter the second number for multiplication: "))
+                        break
+                    except ValueError:
+                        print("Not a number!")
+                multiply(x, y)
             case "history":
                 show_history()
             case "exit":
