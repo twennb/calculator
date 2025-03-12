@@ -41,6 +41,10 @@ def multiply(x, y):
 
 def divide(x, y):
     """function returns x divided by y"""
+    result = x / y
+    print(f"{x} / {y} = {result}\n--------------------")
+
+    log_history(x, "/", y, result)
 
 
 def square(x):
@@ -80,7 +84,7 @@ def main():
             "'add' to perform addition,\n"
             "'sub' to perform subtraction,\n"
             "'mult' to perform multiplication,\n"
-            # "'div' to perform division,\n"
+            "'div' to perform division,\n"
             # "'square' to square a number,\n"
             # "'root' to find the root of a number,\n"
             # "'mod' to perform a modulo operation on two numbers,\n"
@@ -134,6 +138,20 @@ def main():
                     except ValueError:
                         print("Not a number!")
                 multiply(x, y)
+            case "div":
+                while True:
+                    try:
+                        x = int(input("Enter the dividend: "))
+                        break
+                    except ValueError:
+                        print("Not a number!")
+                while True:
+                    try:
+                        y = int(input("Enter the divisor: "))
+                        break
+                    except ValueError:
+                        print("Not a number!")
+                divide(x, y)
             case "history":
                 show_history()
             case "exit":
