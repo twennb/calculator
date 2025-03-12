@@ -1,5 +1,7 @@
 """a simple calculator application that runs in the command line"""
 
+import sys
+
 # Calculator features:
 # addition
 # subtraction
@@ -10,9 +12,15 @@
 # modulo
 #
 
+history = []
+
 
 def add(x, y):
     """function returns x + y"""
+    result = x + y
+    print(f"{x} + {y} = {result}\n")
+
+    history.append(f"{x}+{y}={result}")
 
 
 def subtract(x, y):
@@ -41,6 +49,32 @@ def modulo(x, y):
 
 def main():
     """the main application function"""
+
+    while True:
+        choice = input(
+            "\nWhat would you like to do?\n"
+            "'add' to perform addition,\n"
+            "'sub' to perform subtraction,\n"
+            "'multi' to perform multiplication,\n"
+            "'div' to perform division,\n"
+            "'square' to square a number,\n"
+            "'root' to find the root of a number,\n"
+            "'mod' to perform a modulo operation on two numbers,\n"
+            "'history' to see operation history,\n"
+            "'exit' to close the app\n"
+            ": "
+        )
+        match choice.strip().lower():
+            case "add":
+                x = input("\nEnter first number to be added: ")
+                y = input("Enter second number: ")
+                add(int(x), int(y))
+            case "history":
+                print(f"Previous operations: {history}")
+            case "exit":
+                sys.exit()
+            case _:
+                print("\nInvalid option, try again.\n")
 
 
 if __name__ == "__main__":
