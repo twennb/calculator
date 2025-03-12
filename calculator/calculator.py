@@ -18,13 +18,17 @@ history = []
 def add(x, y):
     """function returns x + y"""
     result = x + y
-    print(f"{x} + {y} = {result}")
+    print(f"{x} + {y} = {result}\n--------------------")
 
-    history.append(f"{x}+{y}= {result}")
+    log_history(x, "+", y, result)
 
 
 def subtract(x, y):
     """function returns x - y"""
+    result = x - y
+    print(f"{x} - {y} = {result}\n--------------------")
+
+    log_history(x, "-", y, result)
 
 
 def multiply(x, y):
@@ -47,6 +51,22 @@ def modulo(x, y):
     """function returns x % y"""
 
 
+def log_history(x, operator, y, result):
+    """function handling the logging of calculation history"""
+    history.append(f"{x} {operator} {y} = {result}")
+
+
+def show_history():
+    """function handling the displaying of calculation history"""
+    if not history:
+        print("\nNo history to show!")
+    else:
+        print("\nPrevious calculations (oldest first): \n" + "--------------------")
+        for item in history:
+            print(item)
+        print("--------------------")
+
+
 def main():
     """the main application function"""
 
@@ -54,7 +74,7 @@ def main():
         choice = input(
             "\nWhat would you like to do?\n"
             "'add' to perform addition,\n"
-            # "'sub' to perform subtraction,\n"
+            "'sub' to perform subtraction,\n"
             # "'multi' to perform multiplication,\n"
             # "'div' to perform division,\n"
             # "'square' to square a number,\n"
@@ -67,9 +87,10 @@ def main():
         match choice.strip().lower():
 
             case "add":
+                print("\n--------------------")
                 while True:
                     try:
-                        x = int(input("\nEnter first number to be added: "))
+                        x = int(input("Enter first number to be added: "))
                         break
                     except ValueError:
                         print("Not a number!")
@@ -80,13 +101,27 @@ def main():
                     except ValueError:
                         print("Not a number!")
                 add(x, y)
-
+            case "sub":
+                print("\n--------------------")
+                while True:
+                    try:
+                        x = int(input("Enter the number to subtract from: "))
+                        break
+                    except ValueError:
+                        print("Not a number!")
+                while True:
+                    try:
+                        y = int(input("How much do you want to subtract by: "))
+                        break
+                    except ValueError:
+                        print("Not a number!")
+                subtract(x, y)
             case "history":
-                print(f"\nPrevious operations: {history}")
+                show_history()
             case "exit":
                 sys.exit()
             case _:
-                print("\nInvalid option, try again.\n")
+                print("\nInvalid option, try again.")
 
 
 if __name__ == "__main__":
